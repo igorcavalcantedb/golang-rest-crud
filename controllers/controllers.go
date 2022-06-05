@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"github.com/igorcavalcantedb/golang-rest-crud/database"
 	"github.com/igorcavalcantedb/golang-rest-crud/models"
 )
 
@@ -16,8 +17,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func TodasPersonalidades(w http.ResponseWriter, r *http.Request) {
-
-	json.NewEncoder(w).Encode(models.Personalidades)
+	var p []models.Personalidade
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
 }
 
 func PersonalidadeById(w http.ResponseWriter, r *http.Request) {
